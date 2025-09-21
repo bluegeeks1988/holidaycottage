@@ -3,7 +3,7 @@
 
     $terms = get_terms(array(
         'taxonomy' => 'property_features',
-        'hide_empty' => false,
+        'hide_empty' => true,
     ));
 
     $terms = show_terms($terms);
@@ -142,7 +142,7 @@ $current_infants  = isset($_GET['infants'])  ? intval($_GET['infants'])  : 0;
 </div>
 
             <!-- Hidden Inputs -->
-            <input type="hidden" id="combined-filter" name="filter" value="">
+            <!--<input type="hidden" id="combined-filter" name="filter" value="">-->
             <input type="hidden" class="search-latitude" id="latitude" name="latitude" value="<?php echo esc_attr($search_fields['latitude']); ?>">
 			<input type="hidden" class="search-longitude" id="longitude" name="longitude" value="<?php echo esc_attr($search_fields['longitude']); ?>">
 
