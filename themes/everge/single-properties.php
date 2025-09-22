@@ -8,6 +8,8 @@
             'heading' => get_field('sykes_property_name', $id),
             'description' => get_field('sykes_short_description', $id),
             'long_description' => get_field('sykes_long_description', $id),
+			'accommodation_details' => get_field('sykes_accommodation_details', $id),
+			'amenities_description' => get_field('sykes_amenities_description', $id),
             'region' => get_field('sykes_property_region', $id),
             'rating' => highest_rating($id),
             'property_type' => get_field('sykes_property_type', $id),
