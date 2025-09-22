@@ -37,6 +37,17 @@
                     <span class="heading-18-23 mt-2">
                         <a href="/favourites/">Add to favourites</a>
                     </span>
+					
+				<h3 class="label-12-14 mt-5 mb-3 line medium">Search More Cottages</h3>
+                <?php
+                    get_html('components/div.homepage-search.php', [
+                        'classes' => [
+                            'mb-4', 
+                            'mt-2', 
+                            'radius-15', 
+                        ]
+                    ]);
+                ?>
                 </div>
             </div>
             <div class="content">
@@ -119,7 +130,9 @@
 
                 <?php if($content['description']): ?>
                     <div class="paragraph-14-18 mt-4">
-                        <?php echo wp_trim_words( $content['description'], 25, '...' ); ?>
+                        <?php echo wp_trim_words( $content['description'], 500, '...' ); ?>
+						<div style="clear:both;">&nbsp;</div>
+						<a href="#accommodation-details" id="more-info" class="button light-green radius-10">Read More</a>
                     </div>
                 <?php endif; ?>
 
@@ -163,31 +176,63 @@
                         </div>
                     </div>
                 <?php endif;?>
+				
+				<!-- Tabs for Accommodation Details and Amenities -->
+				<h3 id="accommodation-details" class="label-12-14 line mt-5 medium">Accommodation Details</h3>
+				<?php if($content['accommodation_details']): ?>
+				<div class="columns mt-4">
+				<div class="paragraph-14-18 accommodation-details">
+						<?php echo wp_kses_post($content['accommodation_details']); ?>
+				</div>
+				</div>
+				<?php endif; ?>
 
-                <!--<h3 class="label-12-14 line mt-5 medium">More Information</h3>-->
-                <!--<?php //if($content['long_description']): ?>-->
-                <!--    <div class="paragraph-14-18 mt-4">-->
-                <!--        <?php //echo $content['long_description']; ?>-->
-                <!--    </div>-->
-                <!--<?php //endif; ?>-->
+                <h3 class="label-12-14 line mt-5 medium ">More Information</h3>
+                <?php if($content['long_description']): ?>
+                    <div class="paragraph-14-18 mt-4">
+                        <?php echo $content['long_description']; ?>
+                    </div>
+                <?php endif; ?>
 
                 <?php if($content['lat'] || $content['lng']): ?>
                     <h3 class="label-12-14 mt-5 line medium">Location</h3>
 
                     <div id="single-map" class="mt-4" data-lat="<?php echo $content['lat']; ?>" data-lng="<?php echo $content['lng']; ?>"></div>
                 <?php endif; ?>
-
-                <h3 class="label-12-14 mt-5 mb-3 line medium">Search More Cottages</h3>
-                <?php
-                    get_html('components/div.homepage-search.php', [
-                        'classes' => [
-                            'mb-4', 
-                            'mt-2', 
-                            'radius-15', 
-                        ]
-                    ]);
-                ?>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Optional styling (if not handled globally) -->
+<style>
+    .tab-button {
+        padding: 8px 16px;
+        border: none;
+        background: #f2f2f2;
+        cursor: pointer;
+        margin-right: 10px;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+    .tab-button.active {
+        background-color: #a7dfc3;
+        color: #000;
+    }
+
+    .tab-content {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+	.accommodation-details p::before {
+    content: "✔";
+    color: #28a745; /* Green tick */
+    margin-right: 10px;
+    font-weight: bold;
+}
+</style>
